@@ -1,0 +1,139 @@
+INTRODUÇÃO
+Além de dados tradicionais também vídeo de voz, indivíduos remotos compartilhem recursos em tempo real.
+Switches fornecem conexão do usuário final com a rede corporativa e principal responsável pelo controle das informações dentra da LAN.
+Roteadores faciliatam o movimento da informação entre LAN, geralmente não tem conhecimento de hosts individuais.
+Funções oferecidas pelos switches: qualidade de serviço, transferência de dados, voz e vídeo, sergurança.
+
+COMPLEXIDADE DAS REDES
+Redes devem ser seguras, confiáveis e altamente disponíveis.
+Componentes legados: Sistema de PBX pequenos, grandes switches telefônicos, infraestrutura de wiring closet.
+Componentes de rede convergente: Comunicação Unificada(Servidor de convergência de meio físico), Switches Cisco Catalyst 2960 LAN Base, Telefones IP Unificados Ciscos.
+
+ELEMENTOS DE UMA REDE CONVERGENTE
+Soluções convergentes utilizam: sistemas de voz, telefones IP, gateways de voz, suporte para vídeo e videoconferência.
+Recursos: Controle de chamadas (processar, identificar, tranferir, colocar em espera e realizar conferência com as chamadas), Mensgem de Voz (correio de voz), Mobilidade (chamdas onde quer que esteja), Atendimento Automático (roteamento de chamadas diretamente para o local ou pessoa certa).
+Principal benefício apenas uma rede física para instalar e gerenciar.
+Suporte a softphone, vídeos ponto a ponto.
+Alem do transporte de dados, oferece uma comunicação rápida por dados, voz e vídeo.
+É necessário um projeto estruturado para gerenciar este ambiente.
+
+REDES COMUTADAS SEM FRONTEIRAS
+Abordagem de arquiteturas que incorporem inteligência, simplifique as operações e seja escalável.
+Cisco Borderless Network projeto cisco, construido sobre infraestrutura de hardware e software escalável e resiliente.
+
+HIERARQUIA DA REDE COMUTADA SEM FRONTEIRAS
+Princípios que garantam disponibilidade, flexibilidade, segurança e gerenciabilidade máxima.
+Princípios: 
+- Hierárquica (Facilida a compreensão da função de cada dispositivo em cada nível, simplifica a implantação, a operação e o gerenciamento, e reduz domínios problematicos em cada nível),
+- Modularidade(expansão direta da rde e ativação de serviços integrados sob demanda),
+- Resiliência(expectativa do usuário de manter a rede sempre ativa),
+- Flexibilidade(compartilhamento inteligente da carga de tráfego)
+Estrutura de projeto hierárquico: modelos de camadas em três níves(acesso, distribuição e núcleo) e modelo de camadas em dois níveis.
+
+ACESSO À DISTRIBUIÇÃO DE NÚCLEO
+Camada de Acesso: borda da rede, por onde o tráfego chega ou sai da rede, switch de camada de acesso é fornecer acesso a rede para o usuário, aplicações operem com mais segurança
+Camada de Distribuição: interface entre a camada de acesso e o núcleo, agregação de rede wiring closet, agregação de domínios de broadcast de camada 2 e limite de roteamento de camada 3, roteamento, política de acesso, switcing inteligente, alta disponibilidade por redundância, caminhos de custos semelhantes até o núcleo, serviços diferenciados as várias classes de aplicações de serviço na borda da rede.
+Camada Núcleo: backbone da rede, agregador para todos os outros pacotes, fonece isolamento contra falhas e conectividade, pode ser combinado com a camada de distribuição.
+Topologia de rede física em estrela estendida.
+
+FUNÇÕES DAS REDE COMUTADAS
+LAN comutada permite mais flexibilidade, gerenciamento de tráfego e recursos adcionais (qualidade de serviço, segurança adicional, suporte rede sem fio e conectividade, suporte novas tecnolgias, como telefonia IP e serviços de mobilidade)
+
+TAMANHO
+Tipos de switch: de configuração fixa(recursos e opções com o switch), de configuração modular(chassi aceita placa de linha com portas), de configuração empilhável(podem ser interconetcatos por um cabo especial, em cascata, alto throughput, operam como grandes switch, Cisco StackWise até nove switches conectados, tolerância a falhs, disponbilidade de largura de banda, implementação cara, porta especial para interconexão, StackPower permite compartilhamento energia)
+
+CONSIDERAÇÕES ESCOLHA DE EQUIPAMENTO
+Custo - depende do número, velocidade, recursos suportados e capacidade de conexão
+Densidade de Porta - número apropriado de equipamentos na rede
+Energia(Potência) - Power over Ethernet (PoE - capacidade de LAN Switching fornecer energia via cabo ethernet)
+Confiabilidade - acesso contínuo a rede
+Velocidade da porta - velocidade de conexão, processar quadros
+Buffers de quadro - capacidade de armazenar quadros em caso de congetionamento
+Escalabilidade - oferce oportunidade de crescimento, ajustar ao crescimento de usuários
+
+SWITCHING
+Equipamento toma decisão com base na Porta de entrada e Endereço de destino
+Swithc usa uma tabela para determinar como encaminhar o tráfego, associa endereço(mac) e porta, saída para um destino é sempre pela mesma porta idependente da entrada
+
+PREENCHIMENTO DINÃMICO TABELA END MAC
+Switch circuitos integrados e software que controla os caminhos
+Tabela de Memória Endereçavel de Conteúdo(CAM ou tabela end mac), tipo de memória especial, pesquisa em alta velocidade
+Quando recebe um quadro de entrada com mac destino que não esteja na tabela encaminha o quadro da todas as portas(inundação) exceto a de entrada, quando recebe a resposta adiciona o Mac de origem da resposta a porta de entrada(uma única porta pode conter vários endereços mac associados devido a interconexão com outros switches)
+1. O switch recebe um quadro do PC1 na Porta 1.
+2. O switch examina o endereço MAC destino e o compara à tabela de endereços MAC.
+	Quando o endereço não está na tabela de endereços MAC, ele associa o endereço MAC origem do PC1 à porta de ingresso (Porta 1) da tabela de endereços MAC. 
+	Se a tabela de endereços MAC já tiver uma entrada para esse endereço origem, o temporizador será reiniciado. A entrada para um endereço MAC é normalmente mantida por cinco minutos. 
+3. Depois de gravar as informações do endereço origem, o switch examina o endereço MAC destino. 
+	Se o endereço destino não estiver na tabela MAC ou for um endereço MAC de broadcast, preenchido somente com Fs, o switch enviará o quadro para todas as portas (inundação), exceto a porta de ingresso. 
+4. O dispositivo destino (PC 3) responde ao quadro com um quadro unicast endereçado ao PC1.
+5. O switch insere o endereço MAC origem do PC 3 e o número da porta de ingresso na tabela de endereços. O endereço destino do quadro e sua porta de saída associada estão localizados na tabela de endereços MAC.
+6. O switch pode agora enviar quadros entre os dispositivos origem e destino sem os inundar, pois tem entradas na tabela de endereços que identificam as portas associadas.
+
+MÉTODOS DE ENCAMINHAMENTO
+Software para circuitos integrados específicos da aplicação(ASICs), reduz tempo tratamento, permite lidar maior número de portas
+Método store-and-forward, recebe o quadro inteiro, calcula o CRC, se o CRC for válido, determina interface saída, toma decisão após receber o quadro inteiro e verificar se tem erros.
+Método cut-through, encaminha o quadro anter de recebê-lo totalmente, no mínimo lê o endereço de destino, toma decisão após determinar a porta de saída e o quadro de entrada
+
+STORE-AND-FOWARD
+Verificação de erros e buffer automático
+Verificação de erros: Valor de Sequência de Verificação de Quadros(FCS), ultimo campo do datagrama, garante quadro livre erros físico e enlace de dados, com erro o quadro é ignorado
+Buffer Automático: suporta combinações de velocidades de ethernet
+Não envia quadros inválidos
+Conserva a largura de banda
+
+CUT-THROUGH
+Começar enviar quadros antes, encaminhamento rápido e processamento de quadros inválidos
+Não descarta a maioria dos quadros inválidos
+Livre de fragmentos: aprovação da janela de colisão (64 bytes) antes de encaminhar, melhor verificação de erros, nenhum aumento de latência, adequado para Computação de Alto Desempenho(HPC)
+Placa NIC descarta quadros incompletos
+
+DOMÍNIOS DE COLISÃO
+Compartilham a mesma largura de banda
+Microssegmentação dividir a rede em segmentos com switches e roteadores, reduzir o número de dispositvos que concorrem pela largura de banda
+Cada porta de um swithc é um domínio de colisão
+
+DOMÍNIOS DE BROADCAST
+Não filtram quadros de broadcast
+Inviar quadros de broadcast para todas as portas(inundação)
+Conjunto de switches interconectados formam um domínio de broadcast
+Somente um roteador pode dividir um domínio de broadcast
+Quadro de broadcast de camada 2 o destino tem somente 1s binários
+Domínio de Broadcast MAC
+
+ALIVIO DO CONGESTIONAMENTO NA REDE(com switches)
+Switches LAN permitem a segmentação da LAN, comunicação full-duplex(transporta sinais transmitidos e recebidos ao mesmo tempo)
+Características: Alta densidade de portas, Grandes buffers de quadro, Velocidade da porta, Switching interno rápido(por barramento interno ou memória compartilhada), Baixo custo por porta
+
+HORA DE ACESSAR A REDE
+Configurações básicas do switch
+- Nome do equipamento:
+ #configure terminal
+ (config)#hostname nome_desejado
+- Senha criptografada privilegiada de EXEC:
+ #configure terminal
+ (config)#enable secret senha_desejada
+- Senha para todas as linhas(console e linhas de 0 a 15):
+ #configure terminal
+ (config)#line console 0
+ (config-line)#password senha_desejada
+ (config-line)#login
+ (config-line)#line vty 0 15
+ (config-line)#password senha_desejada
+ (config-line)#login
+-Criptografar as senhas de texto simples
+ (config-line)#service password-encryption
+-VLAN 1 com ip 192.168.10.2/24 e ativar a interface
+ (config)#interface vlan 1
+ (config-if)#ip address 192.168.10.2 255.255.255.0
+ (config-if)#no shutdown
+- Retornar ao modo EXEC
+ (config-if)#end
+- Exibir a configuração atual
+ #show running-configuration
+
+
+Sh
+
+
+
+ 
